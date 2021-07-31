@@ -52,7 +52,7 @@ class CarPoseDataset(data.Dataset):
         s = max(img.shape[0], img.shape[1]) * 1.0
         rot = 0
         flipped = False
-        if self.split == 'train' :
+        if self.split == 'train':
             if not self.opt.not_rand_crop:
                 s = s * np.random.choice(np.arange(0.6, 1.4, 0.1))
                 w_border = self._get_border(128, img.shape[1])
@@ -119,7 +119,7 @@ class CarPoseDataset(data.Dataset):
         rot_scalar = np.zeros((self.max_objs, 1), dtype=np.float32)
         draw_gaussian = draw_msra_gaussian if self.opt.mse_loss else \
             draw_umich_gaussian
-        calib=np.array(anns[0]['calib'],dtype=np.float32)
+        calib=np.array(anns[0]['calib'], dtype=np.float32)
         calib=np.reshape(calib,(3,4))
 
         gt_det = []
@@ -183,11 +183,11 @@ class CarPoseDataset(data.Dataset):
                     kps[k, j * 2: j * 2 + 2] = pts[j, :2] - ct_int
                     kps_mask[k, j * 2: j * 2 + 2] = 1
                     if pts[j, 2] > 0:
-                        #pts[j, :2] = affine_transform(pts[j, :2], trans_output)
-                        if pts[j, 0] >= 0 and pts[j, 0] < self.opt.output_w and \
-                                pts[j, 1] >= 0 and pts[j, 1] < self.opt.output_h:
-                            #kps[k, j * 2: j * 2 + 2] = pts[j, :2] - ct_int
-                            #kps_mask[k, j * 2: j * 2 + 2] = 1
+                        # pts[j, :2] = affine_transform(pts[j, :2], trans_output)
+                        if 0 <= pts[j, 0] < self.opt.output_w and \
+                                0 <= pts[j, 1] < self.opt.output_h:
+                            # kps[k, j * 2: j * 2 + 2] = pts[j, :2] - ct_int
+                            # kps_mask[k, j * 2: j * 2 + 2] = 1
                             inv_mask[k, j * 2: j * 2 + 2] = 1
                             coor_kps_mask[k, j * 2: j * 2 + 2] = 1
                             pt_int = pts[j, :2].astype(np.int32)

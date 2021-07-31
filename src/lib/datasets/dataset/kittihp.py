@@ -8,6 +8,8 @@ import numpy as np
 import json
 import os
 import torch.utils.data as data
+
+
 class KITTIHP(data.Dataset):
     num_classes = 3
     num_joints = 9
@@ -25,8 +27,8 @@ class KITTIHP(data.Dataset):
 
         self.acc_idxs = [1, 2, 3, 4, 5, 6, 7, 8]
         self.data_dir = os.path.join(opt.data_dir, 'kitti')
-        self.img_dir= os.path.join(self.data_dir,'image')
-        self.calib_dir = os.path.join(self.data_dir,'calib')
+        self.img_dir = os.path.join(self.data_dir, 'image')
+        self.calib_dir = os.path.join(self.data_dir, 'calib')
         if split == 'test':
             self.annot_path = os.path.join(
                 self.data_dir, 'annotations',

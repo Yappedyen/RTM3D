@@ -11,6 +11,8 @@ from models.utils import _sigmoid
 from utils.debugger import Debugger
 from utils.post_process import car_pose_post_process
 from .base_trainer import BaseTrainer
+
+
 class CarPoseLoss(torch.nn.Module):
     def __init__(self, opt):
         super(CarPoseLoss, self).__init__()
@@ -56,6 +58,8 @@ class CarPoseLoss(torch.nn.Module):
                       'rot_loss':rot_loss,'prob_loss':prob_loss,'box_score':box_score,'coor_loss':coor_loss}
 
         return loss_stats, loss_stats
+
+
 class CarPoseTrainer(BaseTrainer):
     def __init__(self, opt, model, optimizer=None):
         super(CarPoseTrainer, self).__init__(opt, model, optimizer=optimizer)

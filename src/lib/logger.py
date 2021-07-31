@@ -13,6 +13,7 @@ try:
 except:
   USE_TENSORBOARD = False
 
+
 class Logger(object):
   def __init__(self, opt):
     """Create a summary writer logging to log_dir."""
@@ -28,7 +29,7 @@ class Logger(object):
         os.makedirs(opt.save_dir)
       if not os.path.exists(opt.debug_dir):
         os.makedirs(opt.debug_dir)
-   
+
     time_str = time.strftime('%Y-%m-%d-%H-%M')
 
     args = dict((name, getattr(opt, name)) for name in dir(opt)
@@ -43,7 +44,7 @@ class Logger(object):
       opt_file.write('\n==> Opt:\n')
       for k, v in sorted(args.items()):
         opt_file.write('  %s: %s\n' % (str(k), str(v)))
-          
+
     log_dir = opt.save_dir + '/logs_{}'.format(time_str)
     if opt.distribute:
       local_rank = os.environ['SLURM_LOCALID']

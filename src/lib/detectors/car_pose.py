@@ -29,7 +29,7 @@ class CarPoseDetector(BaseDetector):
         super(CarPoseDetector, self).__init__(opt)
         self.flip_idx = opt.flip_idx
 
-    def process(self, images,meta, return_time=False):
+    def process(self, images, meta, return_time=False):
         with torch.no_grad():
             torch.cuda.synchronize()
             output = self.model(images)[-1]
@@ -52,13 +52,14 @@ class CarPoseDetector(BaseDetector):
                     if hm_hp is not None else None
                 reg = reg[0:1] if reg is not None else None
                 hp_offset = hp_offset[0:1] if hp_offset is not None else None
+
             if self.opt.faster==True:
                 dets = car_pose_decode_faster(
                     output['hm'], output['hps'], output['dim'], output['rot'], prob=output['prob'],K=self.opt.K, meta=meta, const=self.const)
             else:
                 dets = car_pose_decode(
-                    output['hm'], output['wh'], output['hps'],output['dim'],output['rot'],prob=output['prob'],
-                    reg=reg, hm_hp=hm_hp, hp_offset=hp_offset, K=self.opt.K,meta=meta,const=self.const)
+                    output['hm'], output['wh'], output['hps'],output['dim'], output['rot'], prob=output['prob'],
+                    reg=reg, hm_hp=hm_hp, hp_offset=hp_offset, K=self.opt.K, meta=meta, const=self.const)
 
         if return_time:
             return output, dets, forward_time
@@ -70,7 +71,7 @@ class CarPoseDetector(BaseDetector):
         dets = car_pose_post_process(
             dets.copy(), [meta['c']], [meta['s']],
             meta['out_height'], meta['out_width'])
-        for j in range(1,2):#, self.num_classes + 1):
+        for j in range(1, 2):  # , self.num_classes + 1):
             dets[0][j] = np.array(dets[0][j], dtype=np.float32).reshape(-1, 41)
             # import pdb; pdb.set_trace()
             dets[0][j][:, :4] /= scale

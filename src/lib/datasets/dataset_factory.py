@@ -9,8 +9,10 @@ dataset_factory = {
   'kitti': KITTIHP,
   'nuscenes': NUSCENESHP
 }
+
+
 def get_dataset(dataset):
-  class Dataset(dataset_factory[dataset], CarPoseDataset):
-    pass
-  return Dataset
+    class Dataset(dataset_factory[dataset], CarPoseDataset):
+        pass
+    return Dataset
   

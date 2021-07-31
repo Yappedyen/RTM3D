@@ -18,13 +18,13 @@ After install Anaconda:
     ~~~
 3. Compile deformable convolutional (from [DCNv2](https://github.com/CharlesShang/DCNv2/tree/pytorch_0.4)).
     ~~~
-    cd $KM3D_ROOT/src/lib/models/networks/ # [recommended]
+    cd src/lib/models/networks/DCNv2 # [recommended]
     # or git clone https://github.com/CharlesShang/DCNv2/ # clone if it is not automatically downloaded by `--recursive`.
     cd DCNv2
     ./make.sh
     ~~~
 4. Compile iou3d (from [pointRCNN](https://github.com/sshaoshuai/PointRCNN)). GCC>4.9, I have tested it with GCC 5.4.0 and GCC 4.9.4, both of them are ok. 
     ~~~
-    cd $KM3D_ROOT/src/lib/utiles/iou3d
+    cd RTM3D/src/lib/utils/iou3d
     python setup.py install
     ~~~
