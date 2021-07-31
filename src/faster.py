@@ -44,7 +44,7 @@ def demo(opt):
     time_tol = 0
     num = 0
     for (image_name) in image_names:
-        num+=1
+        num += 1
         ret = detector.run(image_name)
         time_str = ''
         for stat in time_stats:

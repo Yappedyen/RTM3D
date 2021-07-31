@@ -3,6 +3,7 @@ Currently we provide the dataloader of KITTI dataset, and the NuScenes dataset i
 ## Training by python with multiple GPUs in a machine
 Run following command to train model with ResNet-18 backbone.
    ~~~
+   python src/tools/kitti.py
    python ./src/main.py --data_dir ./kitti_format --exp_id KM3D_res18 --arch res_18 --batch_size 32 --master_batch_size 16 --lr 1.25e-4 --gpus 0,1 --num_epochs 200
    ~~~
 Run following command to train model with DLA-34 backbone.
